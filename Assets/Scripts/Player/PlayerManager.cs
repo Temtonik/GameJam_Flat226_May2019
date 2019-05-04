@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
     public float jumpHigher = 0;
     public bool doubleJump = false, fly = false;
 
+    public List<VoodooDoll> VoodooDolls { get => voodooDolls; set => voodooDolls = value; }
 
     private void Awake()
     {
