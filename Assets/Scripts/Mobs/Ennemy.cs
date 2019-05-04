@@ -25,7 +25,8 @@ public class Ennemy : MonoBehaviour
     {
         if (isKilled)
         {
-            GameObject poupeeVaudou = Instantiate(poupeeVaudouPrefab, gameObject.transform.position, Quaternion.identity);
+            GameObject voodooDoll = Instantiate(poupeeVaudouPrefab, gameObject.transform.position, Quaternion.identity);
+            voodooDoll.AddComponent<VoodooDoll>();
         }
     }
 }
