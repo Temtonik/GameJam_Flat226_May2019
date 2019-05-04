@@ -17,7 +17,7 @@ public class VoodooDoll : MonoBehaviour
     {
         if (isAbsorbed)
         {
-            transform.position = Vector2.MoveTowards(transform.position, PlayerManager.s_singleton.transform.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, PlayerManager.s_Singleton.transform.position, speed * Time.deltaTime);
         }
     }
 }
