@@ -23,10 +23,10 @@ namespace UnityStandardAssets._2D
 
         //Félix
         public float time;
-        public bool flyAllow = false; // Ajouté par Félix. 
-        public bool doubleJumpAllow = true; // Ajouté par Félix. 
-        private bool m_doubleJump = false; // Ajouté par Félix.
-        private bool m_fly = false; // Ajouté par Félix.
+        public bool flyAllow = false; 
+        public bool doubleJumpAllow = true; 
+        private bool m_doubleJump = false; 
+        private bool m_fly = false; 
         private float timeLeft;
 
         //Yannick
