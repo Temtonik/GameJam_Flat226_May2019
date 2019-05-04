@@ -24,6 +24,7 @@ namespace UnityStandardAssets._2D
         public bool flyAllow = false; // Ajouté par Félix. 
         public bool doubleJumpAllow = true; // Ajouté par Félix. 
         private bool m_doubleJump = false; // Ajouté par Félix.
+        private bool m_fly = false; // Ajouté par Félix.
 
         //Yannick
         private bool isJumping = false;
@@ -63,6 +64,7 @@ namespace UnityStandardAssets._2D
                 if (isJumping && Input.GetButton("Jump") && m_Rigidbody2D.velocity.y < 0f)
                 {
                     m_Rigidbody2D.drag = 25f;
+                    m_fly = true;
                 }
                 else if (!Input.GetButton("Jump"))
                 {
@@ -72,6 +74,7 @@ namespace UnityStandardAssets._2D
             else if (m_Grounded)
             {
                 isJumping = false;
+                m_fly = false;
                 m_Rigidbody2D.drag = 0;
             }
 
@@ -127,7 +130,7 @@ namespace UnityStandardAssets._2D
                 m_Grounded = false;
                 m_Anim.SetBool("Ground", false);
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-                if(doubleJumpAllow)
+                if(doubleJumpAllow && !m_fly)
                 {
                     m_doubleJump = true;
                     jump = false;
