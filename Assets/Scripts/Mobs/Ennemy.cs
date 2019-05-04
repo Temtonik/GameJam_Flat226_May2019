@@ -13,6 +13,7 @@ public class Ennemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Destroy(collision.gameObject);
+            Destroy(gameObject);
         } else if (collision.gameObject.CompareTag("Louche"))
         {
             isKilled = true;
