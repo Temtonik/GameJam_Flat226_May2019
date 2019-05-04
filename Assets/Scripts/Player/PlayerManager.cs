@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
 
     public static PlayerManager s_Singleton;
 
-    public float jumpHigher = 0;
+    public float jumpHigher = 0, time = 2;
     public bool doubleJump = false, fly = false;
 
     public List<VoodooDoll> VoodooDolls { get => voodooDolls; set => voodooDolls = value; }
@@ -48,6 +48,7 @@ public class PlayerManager : MonoBehaviour
         if (jumpHigher != 0)
             gameObject.GetComponent<PlatformerCharacter2D>().SetJumpForce(jumpHigher);
         gameObject.GetComponent<PlatformerCharacter2D>().flyAllow = fly;
+        gameObject.GetComponent<PlatformerCharacter2D>().time = time;
 
 
     }

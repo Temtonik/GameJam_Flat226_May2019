@@ -13,9 +13,13 @@ public class Ennemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             if (PlayerManager.s_Singleton.VoodooDolls.Count > 0)
+            {
                 PlayerManager.s_Singleton.VoodooDolls.RemoveAt(PlayerManager.s_Singleton.VoodooDolls.Count - 1);
+            }
             else
+            {
                 Destroy(collision.gameObject);
+            }
             Destroy(gameObject);
         } else if (collision.gameObject.CompareTag("Louche"))
         {

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Timers;
 
 namespace UnityStandardAssets._2D
 {
@@ -21,10 +22,12 @@ namespace UnityStandardAssets._2D
         private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
         //Félix
+        public float time;
         public bool flyAllow = false; // Ajouté par Félix. 
         public bool doubleJumpAllow = true; // Ajouté par Félix. 
         private bool m_doubleJump = false; // Ajouté par Félix.
         private bool m_fly = false; // Ajouté par Félix.
+        private float timeLeft;
 
         //Yannick
         private bool isJumping = false;
@@ -36,6 +39,7 @@ namespace UnityStandardAssets._2D
             m_CeilingCheck = transform.Find("CeilingCheck");
             m_Anim = GetComponent<Animator>();
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
+            timeLeft = time;
         }
 
         public void SetJumpForce(float jumpForce)
@@ -60,21 +64,20 @@ namespace UnityStandardAssets._2D
 
             if (!m_Grounded)
             {
-                isJumping = true;
-                if (isJumping && Input.GetButton("Jump") && m_Rigidbody2D.velocity.y < 0f)
+                if (Input.GetButton("Jump") && m_Rigidbody2D.velocity.y < 0f)
                 {
-                    m_Rigidbody2D.drag = 25f;
-                    m_fly = true;
+                    timeLeft -= Time.deltaTime;
+                    if (timeLeft <= 0)
+                        m_Rigidbody2D.drag = 25f;
                 }
                 else if (!Input.GetButton("Jump"))
                 {
                     m_Rigidbody2D.drag = 0;
+                    timeLeft = time;
                 }
             }
             else if (m_Grounded)
             {
-                isJumping = false;
-                m_fly = false;
                 m_Rigidbody2D.drag = 0;
             }
 
@@ -130,7 +133,8 @@ namespace UnityStandardAssets._2D
                 m_Grounded = false;
                 m_Anim.SetBool("Ground", false);
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-                if(doubleJumpAllow && !m_fly)
+                timeLeft = time;
+                if(doubleJumpAllow)
                 {
                     m_doubleJump = true;
                     jump = false;
