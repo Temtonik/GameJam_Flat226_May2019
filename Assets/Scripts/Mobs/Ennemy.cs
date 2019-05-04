@@ -22,6 +22,9 @@ public class Ennemy : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameObject poupeeVaudou = Instantiate(poupeeVaudouPrefab, gameObject.transform.position, Quaternion.identity);
+        if (isKilled)
+        {
+            GameObject poupeeVaudou = Instantiate(poupeeVaudouPrefab, gameObject.transform.position, Quaternion.identity);
+        }
     }
 }
