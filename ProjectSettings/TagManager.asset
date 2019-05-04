@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Fire
   - Spawner
+  - checkpoint
   layers:
   - Default
   - TransparentFX
