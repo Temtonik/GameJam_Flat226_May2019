@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets._2D;
 
 public class PlayerManager : MonoBehaviour
 {
     private List<VoodooDoll> voodooDolls = new List<VoodooDoll>();
 
     public static PlayerManager s_Singleton;
+
+    public float jumpHigher = 0, fly = 0;
+    public bool doubleJump = false;
+
 
     private void Awake()
     {
@@ -38,6 +43,8 @@ public class PlayerManager : MonoBehaviour
         {
             AbsorbVoodooDoll(false);
         }
+        if(jumpHigher != 0)
+            gameObject.GetComponent<PlatformerCharacter2D>().SetJumpForce(jumpHigher);
     }
 
     public void AddVoodooDoll(VoodooDoll doll)
