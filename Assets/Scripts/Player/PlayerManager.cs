@@ -4,7 +4,21 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    List<VoodooDoll> voodooDolls;
+    private List<VoodooDoll> voodooDolls = new List<VoodooDoll>();
+
+    public static PlayerManager s_Singleton;
+
+    private void Awake()
+    {
+        if (s_Singleton != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            s_Singleton = this;
+        }
+    }
 
     private void Update()
     {
