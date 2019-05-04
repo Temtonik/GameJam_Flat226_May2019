@@ -6,6 +6,9 @@ public class Ennemy : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(GameObject.Find("Player"));
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(collision.gameObject);
+        }
     }
 }
