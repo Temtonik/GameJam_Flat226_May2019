@@ -6,8 +6,7 @@ public class SpawnMobs : MonoBehaviour
 {
 
     public GameObject prefab;
-
-    private bool cameraEnter;
+    public Transform spawnPoint;
 
     // Start is called before the first frame update
     void Awake()
@@ -18,10 +17,11 @@ public class SpawnMobs : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (cameraEnter)
-        {
-            GameObject mob = (GameObject)Instantiate(prefab);
-            mob.transform.position = this.transform.position;
-        }
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameObject mob = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
     }
 }
