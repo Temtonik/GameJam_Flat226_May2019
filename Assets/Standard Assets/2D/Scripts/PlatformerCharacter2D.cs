@@ -25,6 +25,9 @@ namespace UnityStandardAssets._2D
         public bool doubleJumpAllow = true; // Ajouté par Félix. 
         private bool m_doubleJump = false; // Ajouté par Félix.
 
+        //Yannick
+        private bool isJumping = false;
+
         private void Awake()
         {
             // Setting up references.
@@ -55,7 +58,22 @@ namespace UnityStandardAssets._2D
             m_Anim.SetBool("Ground", m_Grounded);
 
             if (!m_Grounded)
-                Physics.gravity = new Vector3(0,-1,0);
+            {
+                isJumping = true;
+                if (isJumping && Input.GetButton("Jump") && m_Rigidbody2D.velocity.y < 0f)
+                {
+                    m_Rigidbody2D.drag = 25f;
+                }
+                else if (!Input.GetButton("Jump"))
+                {
+                    m_Rigidbody2D.drag = 0;
+                }
+            }
+            else if (m_Grounded)
+            {
+                isJumping = false;
+                m_Rigidbody2D.drag = 0;
+            }
 
             // Set the vertical animation
             m_Anim.SetFloat("vSpeed", m_Rigidbody2D.velocity.y);

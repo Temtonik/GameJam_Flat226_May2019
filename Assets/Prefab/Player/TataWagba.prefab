@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 3882491931208371385}
   - component: {fileID: 3882491930638130580}
   m_Layer: 0
-  m_Name: CharacterRobotBoy
+  m_Name: TataWagba
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 4294967295
-  flyAllow: 0
+  flyAllow: 1
   doubleJumpAllow: 1
 --- !u!114 &3882491931192601561
 MonoBehaviour:
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpHigher: 0
   doubleJump: 0
-  fly: 0
+  fly: 1
 --- !u!1 &3882491931202313789
 GameObject:
   m_ObjectHideFlags: 0
