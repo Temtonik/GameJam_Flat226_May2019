@@ -31,6 +31,7 @@ namespace UnityStandardAssets._2D
 
         //Yannick
         private bool isJumping = false;
+        private bool airborne = false;
 
         private void Awake()
         {
@@ -60,6 +61,7 @@ namespace UnityStandardAssets._2D
                 if (colliders[i].gameObject != gameObject)
                     m_Grounded = true;
             }
+
             m_Anim.SetBool("Ground", m_Grounded);
 
             if (!m_Grounded)
