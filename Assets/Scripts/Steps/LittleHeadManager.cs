@@ -21,7 +21,7 @@ public class LittleHeadManager : MonoBehaviour
                 PlayerManager.s_Singleton.jumpHigher = 1000;
                 break;
             case WhichAbility.FLY:
-                PlayerManager.s_Singleton.fly = 1;
+                PlayerManager.s_Singleton.fly = true;
                 break;
             case WhichAbility.DOUBLE_JUMP:
                 PlayerManager.s_Singleton.doubleJump = true;

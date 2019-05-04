@@ -9,8 +9,8 @@ public class PlayerManager : MonoBehaviour
 
     public static PlayerManager s_Singleton;
 
-    public float jumpHigher = 0, fly = 0;
-    public bool doubleJump = false;
+    public float jumpHigher = 0;
+    public bool doubleJump = false, fly = false;
 
 
     private void Awake()
@@ -43,8 +43,12 @@ public class PlayerManager : MonoBehaviour
         {
             AbsorbVoodooDoll(false);
         }
-        if(jumpHigher != 0)
+        gameObject.GetComponent<PlatformerCharacter2D>().doubleJumpAllow = doubleJump;
+        if (jumpHigher != 0)
             gameObject.GetComponent<PlatformerCharacter2D>().SetJumpForce(jumpHigher);
+        gameObject.GetComponent<PlatformerCharacter2D>().flyAllow = fly;
+
+
     }
 
     public void AddVoodooDoll(VoodooDoll doll)
