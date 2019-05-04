@@ -20,6 +20,15 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey(SaveGame.X_POSITION))
+        {
+            Vector2 savedPos = new Vector2(PlayerPrefs.GetFloat(SaveGame.X_POSITION), PlayerPrefs.GetFloat(SaveGame.Y_POSITION));
+            transform.position = savedPos;
+        }
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Joystick1Button1))
