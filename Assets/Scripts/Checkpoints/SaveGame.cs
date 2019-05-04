@@ -16,7 +16,7 @@ public class SaveGame : MonoBehaviour
             PlayerPrefs.SetFloat(X_POSITION, transform.position.x);
             PlayerPrefs.SetFloat(Y_POSITION, transform.position.y);
             PlayerPrefs.Save();
+            GetComponent<BoxCollider2D>().enabled = false;
         }
-        GetComponent<BoxCollider2D>().enabled = false;
     }
 }
