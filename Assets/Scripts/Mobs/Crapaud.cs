@@ -45,22 +45,22 @@ public class Crapaud : Ennemy
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            myAnim.SetBool("Jump", false);
-        }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Ground"))
+    //    {
+    //        myAnim.SetBool("Jump", false);
+    //    }
         
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            PlayerManager.s_Singleton.Hit();
-            Destroy(gameObject);
-        }
-        else if (collision.gameObject.CompareTag("Louche"))
-        {
-            isKilled = true;
-            Destroy(gameObject);
-        }
-    }
+    //    if (collision.gameObject.CompareTag("Player"))
+    //    {
+    //        PlayerManager.s_Singleton.Hit();
+    //        Destroy(gameObject);
+    //    }
+    //    else if (collision.gameObject.CompareTag("Louche"))
+    //    {
+    //        isKilled = true;
+    //        Destroy(gameObject);
+    //    }
+    //}
 }

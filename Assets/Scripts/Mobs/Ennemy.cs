@@ -12,6 +12,7 @@ public class Ennemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerManager.s_Singleton.Hit();
@@ -32,7 +33,7 @@ public class Ennemy : MonoBehaviour
             GameObject voodooDoll = Instantiate(poupeeVaudouPrefab, gameObject.transform.position, Quaternion.identity);
             PlayerManager.s_Singleton.AddVoodooDoll(voodooDoll.GetComponent<VoodooDoll>());
         }
-        else
+        else if (!isKilled)
         {
             PlayerManager.s_Singleton.LooseASoul();
         }

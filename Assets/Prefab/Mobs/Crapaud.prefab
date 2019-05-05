@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 3366008860077441714}
   - component: {fileID: 5861274264226375225}
   - component: {fileID: 930288567}
+  - component: {fileID: 6841163024863224389}
   m_Layer: 0
   m_Name: Crapaud
   m_TagString: Untagged
@@ -337,6 +338,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.7252064, y: 2.286543}
   m_EdgeRadius: 0
+--- !u!58 &6841163024863224389
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4094028233584992167}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.264503, y: 0.41}
+  serializedVersion: 2
+  m_Radius: 1.18
 --- !u!1 &5049224229103773407
 GameObject:
   m_ObjectHideFlags: 0

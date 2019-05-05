@@ -92,12 +92,10 @@ public class PlayerManager : MonoBehaviour
     public void LooseASoul ()
     {
         soulsAmount--;
-        Debug.Log("Ready ?");
-        for (int i = soulsSpots.Count - 1; i > 0; i--)
+        for (int i = 0; i < soulsParent.childCount; i++)
         {
             if (soulsSpots[i].IsOccupied())
             {
-                Debug.Log("Destroy");
                 soulsSpots[i].SetUnoccupied();
                 Destroy(willOs[i]);
                 break;
