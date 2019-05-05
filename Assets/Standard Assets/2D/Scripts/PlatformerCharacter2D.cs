@@ -48,6 +48,13 @@ namespace UnityStandardAssets._2D
             this.m_JumpForce = jumpForce;
         }
 
+        private void Update()
+        {
+            if (Input.GetButtonDown("Attack"))
+            {
+                m_Anim.SetTrigger("Attack");
+            }
+        }
 
         private void FixedUpdate()
         {
