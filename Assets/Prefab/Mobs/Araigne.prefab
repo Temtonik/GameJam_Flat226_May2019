@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7231765459851635954}
   - component: {fileID: 7231765459851635953}
   - component: {fileID: 7231765459851635952}
+  - component: {fileID: 8945535056697958653}
   m_Layer: 0
   m_Name: Araigne
   m_TagString: Untagged
@@ -207,5 +208,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8cbe6e35448e8e499137694a33d0589, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8945535056697958653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7231765459851635951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fd9f18a52f79cc46a9cf215563f41e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
