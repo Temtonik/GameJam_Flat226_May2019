@@ -10415,10 +10415,10 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0
+  - time: 0.041666668
     functionName: PlaySound
     data: 
-    objectReferenceParameter: {fileID: 8300000, guid: ca7484f8c9b23d845ac111de2480ac4e,
+    objectReferenceParameter: {fileID: 8300000, guid: aa26a0fd47d46dc44b2c666eecf553ee,
       type: 3}
     floatParameter: 0
     intParameter: 0
