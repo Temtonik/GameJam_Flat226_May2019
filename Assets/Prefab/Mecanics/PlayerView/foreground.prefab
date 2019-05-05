@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7093007405535494136}
+  - component: {fileID: -6708058605585035960}
   m_Layer: 0
   m_Name: foreground
   m_TagString: Untagged
@@ -24,9 +25,23 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7093007405535494137}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4209049, y: 0.5223712, z: -528.9336}
+  m_LocalPosition: {x: 1.4209049, y: 0.5223712, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6708058605585035960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7093007405535494137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5793c64ce8085084eb563130496179c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orderInLayer: -5
+  zPosition: 0
