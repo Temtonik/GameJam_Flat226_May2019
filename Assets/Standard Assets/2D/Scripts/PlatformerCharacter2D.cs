@@ -54,6 +54,29 @@ namespace UnityStandardAssets._2D
             {
                 m_Anim.SetTrigger("Attack");
             }
+            else if (Input.GetAxis("Vertical") < -0.3f && !m_Grounded && !m_Anim.GetBool("AttackDownwards"))
+            {
+                m_Anim.SetBool("AttackDownwards", true);
+            }
+            else if ((Input.GetAxis("Vertical") > -0.3f && !m_Grounded) || (m_Grounded && m_Anim.GetBool("AttackDownwards")))
+            {
+                m_Anim.ResetTrigger("Attack");
+                m_Anim.SetBool("AttackDownwards", false);
+            }
+            else if (Input.GetButtonDown("Absorb"))
+            {
+                m_Anim.SetBool("Absorb", true);
+                m_Anim.SetBool("StartAbsorb", true);
+            }
+            else if (!Input.GetButton("Absorb") && m_Anim.GetBool("Absorb"))
+            {
+                m_Anim.SetBool("Absorb", false);
+            }
+        }
+
+        public void SetStartAbsorbFalse ()
+        {
+            m_Anim.SetBool("StartAbsorb", false);
         }
 
         private void FixedUpdate()
@@ -97,6 +120,11 @@ namespace UnityStandardAssets._2D
 
         public void Move(float move, bool crouch, bool jump)
         {
+            if (m_Anim.GetBool("Absorb"))
+            {
+                return;
+            }
+
             // If crouching, check to see if the character can stand up
             if (!crouch && m_Anim.GetBool("Crouch"))
             {

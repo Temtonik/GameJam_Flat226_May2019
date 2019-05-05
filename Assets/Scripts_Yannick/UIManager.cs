@@ -43,6 +43,7 @@ public class UIManager : MonoBehaviour
     {
         ancestorsShown = true;
         myAnim.SetTrigger("ShowAncestors");
+        myAnim.ResetTrigger("HideAncestors");
     }
 
     public void HideAncestorsPortrait()
