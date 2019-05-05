@@ -22,12 +22,12 @@ namespace UnityStandardAssets._2D
         private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
         //Félix
-        public float time;
+        public GameObject louche;
         public bool flyAllow = false; 
         public bool doubleJumpAllow = true; 
         private bool m_doubleJump = false; 
-        private bool m_fly = false; 
-        private float timeLeft;
+        private bool m_fly = false;
+        public float time, timeLeft;
 
         //Yannick
         private bool isJumping = false;
@@ -52,16 +52,22 @@ namespace UnityStandardAssets._2D
         {
             if (Input.GetButtonDown("Attack"))
             {
+                louche.GetComponent<BoxCollider2D>().enabled = true;
                 m_Anim.SetTrigger("Attack");
             }
             else if (Input.GetAxis("Vertical") < -0.3f && !m_Grounded && !m_Anim.GetBool("AttackDownwards"))
             {
+                louche.GetComponent<BoxCollider2D>().enabled = true;
                 m_Anim.SetBool("AttackDownwards", true);
             }
             else if ((Input.GetAxis("Vertical") > -0.3f && !m_Grounded) || (m_Grounded && m_Anim.GetBool("AttackDownwards")))
             {
+                louche.GetComponent<BoxCollider2D>().enabled = true;
                 m_Anim.ResetTrigger("Attack");
                 m_Anim.SetBool("AttackDownwards", false);
+            } else
+            {
+                louche.GetComponent<BoxCollider2D>().enabled = false;
             }
         }
 
