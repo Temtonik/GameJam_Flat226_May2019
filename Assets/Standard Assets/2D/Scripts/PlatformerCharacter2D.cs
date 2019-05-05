@@ -63,15 +63,6 @@ namespace UnityStandardAssets._2D
                 m_Anim.ResetTrigger("Attack");
                 m_Anim.SetBool("AttackDownwards", false);
             }
-            else if (Input.GetButtonDown("Absorb"))
-            {
-                m_Anim.SetBool("Absorb", true);
-                m_Anim.SetBool("StartAbsorb", true);
-            }
-            else if (!Input.GetButton("Absorb") && m_Anim.GetBool("Absorb"))
-            {
-                m_Anim.SetBool("Absorb", false);
-            }
         }
 
         public void SetStartAbsorbFalse ()

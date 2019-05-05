@@ -5,35 +5,36 @@ using UnityEngine;
 public class Ennemy : MonoBehaviour
 {
     public GameObject poupeeVaudouPrefab;
+    public GameObject vfxDeath;
 
-    private bool isKilled = false;
+    [HideInInspector]
+    public bool isKilled = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (PlayerManager.s_Singleton.VoodooDolls.Count > 0)
-            {
-                PlayerManager.s_Singleton.VoodooDolls.RemoveAt(PlayerManager.s_Singleton.VoodooDolls.Count - 1);
-            }
-            else
-            {
-                Destroy(collision.gameObject);
-            }
+            PlayerManager.s_Singleton.Hit();
             Destroy(gameObject);
-        } else if (collision.gameObject.CompareTag("Louche"))
+        }
+        else if (collision.gameObject.CompareTag("Louche"))
         {
             isKilled = true;
             Destroy(gameObject);
         }
     }
 
-    private void OnDestroy()
+    public void OnDestroy()
     {
+        Destroy(Instantiate(vfxDeath, transform.position, Quaternion.identity), 0.8f);
         if (isKilled)
         {
             GameObject voodooDoll = Instantiate(poupeeVaudouPrefab, gameObject.transform.position, Quaternion.identity);
-            voodooDoll.AddComponent<VoodooDoll>();
+            PlayerManager.s_Singleton.AddVoodooDoll(voodooDoll.GetComponent<VoodooDoll>());
+        }
+        else
+        {
+            PlayerManager.s_Singleton.LooseASoul();
         }
     }
 }

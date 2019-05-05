@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class VoodooDoll : MonoBehaviour
 {
-    public bool isAbsorbed = false;
+    private bool isAbsorbed = false;
 
-    float speed = 1;
+    public float speed = 1;
 
     void Update()
     {
@@ -17,7 +17,23 @@ public class VoodooDoll : MonoBehaviour
     {
         if (isAbsorbed)
         {
-            transform.position = Vector2.MoveTowards(transform.position, PlayerManager.s_Singleton.transform.position, speed * Time.deltaTime);
+            Vector3 playerPos = PlayerManager.s_Singleton.transform.position;
+            transform.position = Vector2.MoveTowards(transform.position, playerPos, speed * Time.deltaTime);
+            if (transform.position == playerPos)
+            {
+                PlayerManager.s_Singleton.EarnASoul();
+                Destroy(gameObject);
+            }
         }
+    }
+
+    public void StartAbsorbtion ()
+    {
+        isAbsorbed = true;
+    }
+
+    public void StopAbsorbtion()
+    {
+        isAbsorbed = false;
     }
 }

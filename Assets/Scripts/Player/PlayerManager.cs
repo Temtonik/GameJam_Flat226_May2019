@@ -11,8 +11,16 @@ public class PlayerManager : MonoBehaviour
 
     public float jumpHigher = 0, time = 2;
     public bool doubleJump = false, fly = false;
+    private int soulsAmount = 0;
 
-    public List<VoodooDoll> VoodooDolls { get => voodooDolls; set => voodooDolls = value; }
+    private Animator myAnim;
+    public Transform soulsParent;
+    public GameObject willO;
+    private List<SoulSpot> soulsSpots = new List<SoulSpot>();
+    private AudioSource myAS;
+    public AudioClip transfoSFX;
+    public AudioClip looseSoulSFX;
+    private List<GameObject> willOs = new List<GameObject>();
 
     private void Awake()
     {
@@ -28,6 +36,12 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
+        myAS = GetComponent<AudioSource>();
+        foreach (Transform trs in soulsParent)
+        {
+            soulsSpots.Add(trs.GetComponent<SoulSpot>());
+        }
+        myAnim = GetComponent<Animator>();
         if (PlayerPrefs.HasKey(SaveGame.X_POSITION))
         {
             Vector2 savedPos = new Vector2(PlayerPrefs.GetFloat(SaveGame.X_POSITION), PlayerPrefs.GetFloat(SaveGame.Y_POSITION));
@@ -37,12 +51,15 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+        if (Input.GetButtonDown("Absorb"))
         {
+            myAnim.SetBool("Absorb", true);
+            myAnim.SetBool("StartAbsorb", true);
             AbsorbVoodooDoll(true);
         }
-        else if (Input.GetKeyUp(KeyCode.Joystick1Button1))
+        else if (!Input.GetButton("Absorb") && myAnim.GetBool("Absorb"))
         {
+            myAnim.SetBool("Absorb", false);
             AbsorbVoodooDoll(false);
         }
 
@@ -55,9 +72,76 @@ public class PlayerManager : MonoBehaviour
 
     }
 
+    public void Hit ()
+    {
+        if (soulsAmount > 0)
+        {
+            LooseASoul();
+        }
+        else if (soulsAmount == 0)
+        {
+            Death();
+        }
+    }
+
+    private void Death ()
+    {
+
+    }
+
+    public void LooseASoul ()
+    {
+        soulsAmount--;
+        Debug.Log("Ready ?");
+        for (int i = soulsSpots.Count - 1; i > 0; i--)
+        {
+            if (soulsSpots[i].IsOccupied())
+            {
+                Debug.Log("Destroy");
+                soulsSpots[i].SetUnoccupied();
+                Destroy(willOs[i]);
+                break;
+            }
+        }
+        myAnim.SetTrigger("Hit");
+        myAS.clip = looseSoulSFX;
+        myAS.Play();
+    }
+
+    public void EarnASoul ()
+    {
+        soulsAmount++;
+        Transform tmpWill = null;
+        
+        foreach (SoulSpot sSpot in soulsSpots)
+        {
+            if (!sSpot.IsOccupied())
+            {
+                tmpWill = sSpot.transform;
+                break;
+            }
+        }
+
+        if (tmpWill != null)
+        {
+            GameObject will = Instantiate(willO, tmpWill.position, Quaternion.identity);
+            will.GetComponent<WillO>().AssignTarget(tmpWill);
+            tmpWill.GetComponent<SoulSpot>().SetOccupied();
+            willOs.Add(will);
+        }
+        
+    }
+
+    public void PlayTransfoSFX()
+    {
+        myAS.clip = transfoSFX;
+        myAS.Play();
+    }
+
     public void AddVoodooDoll(VoodooDoll doll)
     {
         voodooDolls.Add(doll);
+        PlayTransfoSFX();
     }
 
     void AbsorbVoodooDoll(bool absorbing)
@@ -65,9 +149,15 @@ public class PlayerManager : MonoBehaviour
         foreach(VoodooDoll doll in voodooDolls)
         {
             if (absorbing)
-                doll.isAbsorbed = true;
+                doll.StartAbsorbtion();
             else
-                doll.isAbsorbed = false;
+                doll.StopAbsorbtion();
         }
+    }
+
+    public void OnDollAbsorbed (VoodooDoll aDoll)
+    {
+        voodooDolls.Remove(aDoll);
+        EarnASoul();
     }
 }
