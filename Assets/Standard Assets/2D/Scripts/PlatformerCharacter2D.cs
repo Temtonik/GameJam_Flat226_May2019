@@ -65,9 +65,6 @@ namespace UnityStandardAssets._2D
                 louche.GetComponent<BoxCollider2D>().enabled = true;
                 m_Anim.ResetTrigger("Attack");
                 m_Anim.SetBool("AttackDownwards", false);
-            } else
-            {
-                louche.GetComponent<BoxCollider2D>().enabled = false;
             }
         }
 
