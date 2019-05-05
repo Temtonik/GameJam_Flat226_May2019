@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7231765459851635953}
   - component: {fileID: 7231765459851635952}
   - component: {fileID: 8945535056697958653}
+  - component: {fileID: 7185403868531533746}
   m_Layer: 0
   m_Name: Araigne
   m_TagString: Untagged
@@ -222,3 +223,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fd9f18a52f79cc46a9cf215563f41e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poupeeVaudouPrefab: {fileID: 0}
+  vfxDeath: {fileID: 0}
+  isKilled: 0
+  anim: {fileID: 0}
+  attackDistance: 0
+  goDownDistance: 0
+--- !u!61 &7185403868531533746
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7231765459851635951}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 50, y: 50}
+    newSize: {x: 50, y: 50}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 50, y: 50}
+  m_EdgeRadius: 0
