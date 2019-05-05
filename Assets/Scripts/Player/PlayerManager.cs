@@ -40,10 +40,12 @@ public class PlayerManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Joystick1Button1))
         {
             AbsorbVoodooDoll(true);
-        } else if (Input.GetKeyUp(KeyCode.Joystick1Button1))
+        }
+        else if (Input.GetKeyUp(KeyCode.Joystick1Button1))
         {
             AbsorbVoodooDoll(false);
         }
+
         gameObject.GetComponent<PlatformerCharacter2D>().doubleJumpAllow = doubleJump;
         if (jumpHigher != 0)
             gameObject.GetComponent<PlatformerCharacter2D>().SetJumpForce(jumpHigher);
