@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpiderManager : Ennemy
 {
-    public Transform fil;
+    public Transform fil, destination;
 
     private Animator anim;
 
@@ -35,7 +35,7 @@ public class SpiderManager : Ennemy
             anim.SetBool("isIdle", false);
             anim.SetBool("isGoingDown", true);
         }
-        if (transform.position.y <= origin.y - goDownDistance)
+        if (transform.position.y <= origin.y - (origin.y - destination.position.y))
         {
             isGoingDown = false;
             anim.SetBool("isGoingDown", false);
