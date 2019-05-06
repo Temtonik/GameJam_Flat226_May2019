@@ -15,8 +15,7 @@ public class FilManager : MonoBehaviour
 
     public void FollowSpider(Transform spider, Vector3 origin, float speed)
     {
-        Debug.Log("Spider position:" + spider.position.y + "  Fil position" + transform.localScale.y);
         transform.position = new Vector3(transform.position.x,opos.y + (oSize.y - transform.lossyScale.y), transform.position.z);
-        transform.localScale = new Vector3(oscale.x, oscale.y + ((origin.y - spider.position.y) / 2), 1);
+        transform.localScale = new Vector3(oscale.x, oscale.y + (origin.y - spider.position.y), 1);
     }
 }
