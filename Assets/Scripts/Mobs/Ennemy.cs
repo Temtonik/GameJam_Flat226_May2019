@@ -15,6 +15,7 @@ public class Ennemy : MonoBehaviour
         
         if (collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log(collision.gameObject.name);
             PlayerManager.s_Singleton.Hit();
             Destroy(gameObject);
         }
@@ -33,9 +34,9 @@ public class Ennemy : MonoBehaviour
             GameObject voodooDoll = Instantiate(poupeeVaudouPrefab, gameObject.transform.position, Quaternion.identity);
             PlayerManager.s_Singleton.AddVoodooDoll(voodooDoll.GetComponent<VoodooDoll>());
         }
-        else if (!isKilled)
-        {
-            PlayerManager.s_Singleton.LooseASoul();
-        }
+        //else if (!isKilled)
+        //{
+        //    PlayerManager.s_Singleton.LooseASoul();
+        //}
     }
 }

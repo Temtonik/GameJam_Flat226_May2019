@@ -13,12 +13,12 @@ public class LittleHeadManager : MonoBehaviour
     public WhichAbility unlock;
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void UnlockAbility()
     {
         switch (unlock)
         {
             case WhichAbility.JUMP_HIGHER:
-                PlayerManager.s_Singleton.jumpHigher = 1000;
+                PlayerManager.s_Singleton.jumpHigher = 600;
                 break;
             case WhichAbility.FLY:
                 PlayerManager.s_Singleton.fly = true;

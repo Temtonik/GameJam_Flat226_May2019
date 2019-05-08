@@ -32,6 +32,7 @@ namespace UnityStandardAssets._2D
         //Yannick
         private bool isJumping = false;
         private bool airborne = false;
+        private bool canPlay = true;
 
         private void Awake()
         {
@@ -48,8 +49,21 @@ namespace UnityStandardAssets._2D
             this.m_JumpForce = jumpForce;
         }
 
+        public void Freeze ()
+        {
+            canPlay = false;
+        }
+
+        public void Unfreeze()
+        {
+            canPlay = true;
+        }
+
         private void Update()
         {
+            if (!canPlay)
+                return;
+
             if (Input.GetButtonDown("Attack"))
             {
                 louche.GetComponent<BoxCollider2D>().enabled = true;
@@ -75,6 +89,9 @@ namespace UnityStandardAssets._2D
 
         private void FixedUpdate()
         {
+            if (!canPlay)
+                return;
+
             m_Grounded = false;
 
             // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
@@ -90,21 +107,27 @@ namespace UnityStandardAssets._2D
 
             if (!m_Grounded)
             {
-                if (Input.GetButton("Jump") && m_Rigidbody2D.velocity.y < 0f)
+                if (Input.GetButton("Jump") && m_Rigidbody2D.velocity.y < 0f && flyAllow)
                 {
                     timeLeft -= Time.deltaTime;
-                    if (timeLeft <= 0)
+                    if (timeLeft < 0)
+                    {
+                        timeLeft = 0f;
                         m_Rigidbody2D.drag = 25f;
+                        m_Anim.SetBool("Fly", true);
+                    }
                 }
-                else if (!Input.GetButton("Jump"))
+                else if (!Input.GetButton("Jump") && flyAllow)
                 {
                     m_Rigidbody2D.drag = 0;
                     timeLeft = time;
+                    m_Anim.SetBool("Fly", false);
                 }
             }
             else if (m_Grounded)
             {
                 m_Rigidbody2D.drag = 0;
+                m_Anim.SetBool("Fly", false);
             }
 
             // Set the vertical animation
@@ -114,6 +137,9 @@ namespace UnityStandardAssets._2D
 
         public void Move(float move, bool crouch, bool jump)
         {
+            if (!canPlay)
+                return;
+
             if (m_Anim.GetBool("Absorb"))
             {
                 return;

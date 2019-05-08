@@ -9,7 +9,27 @@ public class UIManager : MonoBehaviour
 
     private Animator myAnim;
     private bool ancestorsShown = false;
-    
+    private Gem currentGemScript;
+    public Transform ancestorsParent;
+    private int ancestorsNb = 0;
+
+    public GameObject dialogueSection;
+    public Text dialogueText;
+
+    public static UIManager s_Singleton;
+
+    private void Awake()
+    {
+        if (s_Singleton != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            s_Singleton = this;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +57,42 @@ public class UIManager : MonoBehaviour
                 HideAncestorsPortrait();
             }
         }
+
+        if (dialogueSection.activeSelf && Input.GetButtonDown("Attack"))
+        {
+            HideDialogueBox();
+        }
+    }
+
+    public void DisplayDialogueBox (string textToDisplay, Gem cGemScript)
+    {
+        currentGemScript = cGemScript;
+        dialogueText.text = textToDisplay;
+        PlayerManager.s_Singleton.FreezeCharacter();
+        myAnim.SetTrigger("DialogueToggle");
+    }
+
+    public void HideDialogueBox()
+    {
+        currentGemScript.ActivateCollider();
+        myAnim.SetTrigger("DialogueToggle");
+        dialogueText.text = "";
+    }
+
+    public void FreeCharacter ()
+    {
+        PlayerManager.s_Singleton.UnfreezeCharacter();
+    }
+
+    public void LockCharacter()
+    {
+        PlayerManager.s_Singleton.FreezeCharacter();
+    }
+
+    public void AddAHead ()
+    {
+        ancestorsParent.GetChild(ancestorsNb).GetComponent<AncestorManager>().CompleteHead();
+        ancestorsNb++;
     }
 
     public void ShowAncestorsPortrait()

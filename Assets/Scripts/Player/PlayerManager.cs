@@ -13,6 +13,10 @@ public class PlayerManager : MonoBehaviour
     public bool doubleJump = false, fly = false;
     private int soulsAmount = 0;
 
+    public float respawnCD = 1.2f;
+    private Vector3 spawnPoint;
+    private SpriteRenderer mySprite;
+    public GameObject vfxDeath;
     private Animator myAnim;
     public Transform soulsParent;
     public GameObject willO;
@@ -21,6 +25,8 @@ public class PlayerManager : MonoBehaviour
     public AudioClip transfoSFX;
     public AudioClip looseSoulSFX;
     private List<GameObject> willOs = new List<GameObject>();
+
+    private bool canplay = true;
 
     private void Awake()
     {
@@ -37,6 +43,7 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         myAS = GetComponent<AudioSource>();
+        mySprite = GetComponent<SpriteRenderer>();
         foreach (Transform trs in soulsParent)
         {
             soulsSpots.Add(trs.GetComponent<SoulSpot>());
@@ -47,10 +54,26 @@ public class PlayerManager : MonoBehaviour
             Vector2 savedPos = new Vector2(PlayerPrefs.GetFloat(SaveGame.X_POSITION), PlayerPrefs.GetFloat(SaveGame.Y_POSITION));
             transform.position = savedPos;
         }
+        spawnPoint = transform.position;
+    }
+
+    public void FreezeCharacter ()
+    {
+        canplay = false;
+        GetComponent<PlatformerCharacter2D>().Freeze();
+    }
+
+    public void UnfreezeCharacter()
+    {
+        canplay = true;
+        GetComponent<PlatformerCharacter2D>().Unfreeze();
     }
 
     private void Update()
     {
+        if (!canplay)
+            return;
+
         if (Input.GetButtonDown("Absorb"))
         {
             myAnim.SetBool("Absorb", true);
@@ -63,13 +86,11 @@ public class PlayerManager : MonoBehaviour
             AbsorbVoodooDoll(false);
         }
 
-        gameObject.GetComponent<PlatformerCharacter2D>().doubleJumpAllow = doubleJump;
+        GetComponent<PlatformerCharacter2D>().doubleJumpAllow = doubleJump;
         if (jumpHigher != 0)
-            gameObject.GetComponent<PlatformerCharacter2D>().SetJumpForce(jumpHigher);
-        gameObject.GetComponent<PlatformerCharacter2D>().flyAllow = fly;
-        gameObject.GetComponent<PlatformerCharacter2D>().time = time;
-
-
+            GetComponent<PlatformerCharacter2D>().SetJumpForce(jumpHigher);
+        GetComponent<PlatformerCharacter2D>().flyAllow = fly;
+        GetComponent<PlatformerCharacter2D>().time = time;
     }
 
     public void Hit ()
@@ -86,7 +107,26 @@ public class PlayerManager : MonoBehaviour
 
     private void Death ()
     {
+        mySprite.enabled = false;
+        Destroy(Instantiate(vfxDeath, transform.position, Quaternion.identity), 0.8f);
+        StartCoroutine("RespawnCD");
+    }
 
+    IEnumerator RespawnCD ()
+    {
+        yield return new WaitForSeconds(respawnCD);
+        Respawn();
+    }
+
+    private void Respawn ()
+    {
+        transform.position = spawnPoint;
+        mySprite.enabled = true;
+    }
+
+    public void UpdateSpawnPoint ()
+    {
+        spawnPoint = transform.position;
     }
 
     public void LooseASoul ()
