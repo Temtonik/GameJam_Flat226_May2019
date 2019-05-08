@@ -1278,6 +1278,7 @@ GameObject:
   - component: {fileID: 7435315058477214520}
   - component: {fileID: 8399206034874719238}
   - component: {fileID: 8399206034874719233}
+  - component: {fileID: 7366191948843216027}
   m_Layer: 0
   m_Name: TataWagba
   m_TagString: Player
@@ -1294,7 +1295,7 @@ Transform:
   m_GameObject: {fileID: 7245279029445107915}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.11, y: -0.74, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 7245279028269294684}
   - {fileID: 7245279028494783938}
@@ -1343,7 +1344,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 30
+  m_SortingOrder: 150
   m_Sprite: {fileID: 21300000, guid: b670e6ee112be7f4fa7b76502e49eea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1473,16 +1474,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d08f91df3bd212f429df17f53ce2f364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxSpeed: 10
-  m_JumpForce: 800
+  m_MaxSpeed: 5
+  m_JumpForce: 500
   m_CrouchSpeed: 0.25
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 4294967295
   louche: {fileID: 7245279028467718030}
-  flyAllow: 1
-  doubleJumpAllow: 1
+  flyAllow: 0
+  doubleJumpAllow: 0
   time: 0
   timeLeft: 0
 --- !u!114 &7245279029445107906
@@ -1535,10 +1536,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d189ba00e97374c88257652b5827b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHigher: 0
+  jumpHigher: 500
   time: 0.12
   doubleJump: 0
-  fly: 1
+  fly: 0
   respawnCD: 1.2
   vfxDeath: {fileID: 7127513900004746742, guid: 77a265da822cd5741b2956efd65ce15e,
     type: 3}
@@ -1673,6 +1674,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8cbe6e35448e8e499137694a33d0589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!81 &7366191948843216027
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7245279029445107915}
+  m_Enabled: 1
 --- !u!1 &7245279029471502430
 GameObject:
   m_ObjectHideFlags: 0

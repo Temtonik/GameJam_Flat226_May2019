@@ -8,7 +8,7 @@ public class DetectPlayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        spider.GetComponent<SpiderManager>().IsGoingDown = true;
+        spider.GetComponent<SpiderManager>().GoDown();
         GetComponent<BoxCollider2D>().enabled = false;
     }
 }

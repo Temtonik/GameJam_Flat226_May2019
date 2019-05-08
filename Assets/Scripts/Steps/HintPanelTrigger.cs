@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class HintPanelTrigger : MonoBehaviour
 {
-    public GameObject hintPanelPrefab, hintPanelSpawner,HintPanelTarget;
+    public GameObject hintPanelPrefab,HintPanelTarget;
     public float speed;
 
     private GameObject hintPanel;
-    private Vector3 characterPosition;
+    private bool moveToDestination = true;
+    //private Vector3 characterPosition;
 
     private void Update()
     {
-        if (hintPanel != null)
+        if (hintPanel != null && moveToDestination)
         {
-            if (hintPanel.transform.position != characterPosition)
+            hintPanel.transform.position = Vector3.MoveTowards(hintPanel.transform.position, HintPanelTarget.transform.position, speed * Time.deltaTime);
+            hintPanel.transform.rotation = Quaternion.RotateTowards(hintPanel.transform.rotation, HintPanelTarget.transform.rotation, speed * Time.deltaTime * 6f);
+            if (hintPanel.transform.position == HintPanelTarget.transform.position)
             {
-                hintPanel.transform.position = Vector3.MoveTowards(hintPanel.transform.position, characterPosition, speed * Time.deltaTime);
-                hintPanel.transform.rotation = Quaternion.RotateTowards(hintPanel.transform.rotation, HintPanelTarget.transform.rotation, speed * Time.deltaTime * 6f);
+                moveToDestination = false;
             }
         }
     }
@@ -26,12 +28,11 @@ public class HintPanelTrigger : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            characterPosition = HintPanelTarget.transform.position;
-            Vector2 randomPosition = new Vector2(Mathf.PerlinNoise(0,1) * 10, hintPanelSpawner.transform.position.y);
+            Vector2 randomPosition = Camera.main.transform.GetChild(1).position;
 
             hintPanel = Instantiate(hintPanelPrefab, randomPosition, Quaternion.LookRotation(new Vector3(0, 0, HintPanelTarget.transform.position.z)));
 
-            float AngleRad = Mathf.Atan2(characterPosition.y - hintPanel.transform.position.y, characterPosition.x - hintPanel.transform.position.x);
+            float AngleRad = Mathf.Atan2(HintPanelTarget.transform.position.y - hintPanel.transform.position.y, HintPanelTarget.transform.position.x - hintPanel.transform.position.x);
             float AngleDeg = (180 / Mathf.PI) * AngleRad;
             hintPanel.transform.rotation = Quaternion.Euler(0, 0, AngleDeg);
 

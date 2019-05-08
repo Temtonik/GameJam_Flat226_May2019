@@ -224,10 +224,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b87ab866fef639b48b2734c80446786a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poupeeVaudouPrefab: {fileID: 3551975040954291666, guid: 42fcd27779e8e4c4c974e1480d6773f8,
+  poupeeVaudouPrefab: {fileID: 1708473371747210872, guid: 6349a1f1a5b9a964aaff1b7fd20e6c88,
     type: 3}
   vfxDeath: {fileID: 7127513900004746742, guid: 77a265da822cd5741b2956efd65ce15e,
     type: 3}
+  myTarget: {fileID: 0}
   isKilled: 0
   speed: 3
 --- !u!61 &8939193982743404725

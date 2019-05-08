@@ -146,8 +146,9 @@ public class PlayerManager : MonoBehaviour
         myAS.Play();
     }
 
-    public void EarnASoul ()
+    public void EarnASoul (VoodooDoll aDoll)
     {
+        voodooDolls.Remove(aDoll);
         soulsAmount++;
         Transform tmpWill = null;
         
@@ -191,11 +192,5 @@ public class PlayerManager : MonoBehaviour
             else
                 doll.StopAbsorbtion();
         }
-    }
-
-    public void OnDollAbsorbed (VoodooDoll aDoll)
-    {
-        voodooDolls.Remove(aDoll);
-        EarnASoul();
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Crapaud : Ennemy
 {
     public float jumpImpulse = 5f;
-    private Transform myTarget;
+    
     private Animator myAnim;
     private bool playerSpotted = false;
     private Rigidbody2D myRb;
@@ -13,9 +13,9 @@ public class Crapaud : Ennemy
     private AudioSource myAS;
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
-        myTarget = PlayerManager.s_Singleton.transform;
+        base.Start();
         myRb = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
         myAS = GetComponent<AudioSource>();
@@ -23,19 +23,9 @@ public class Crapaud : Ennemy
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
-        if (myTarget.position.x > transform.position.x)
-        {
-            Vector3 tmpRot = new Vector3(0f, 180f, 0f);
-            transform.rotation = Quaternion.Euler(tmpRot);
-        }
-        else if (myTarget.position.x < transform.position.x)
-        {
-            Vector3 tmpRot = new Vector3(0f, 0, 0f);
-            transform.rotation = Quaternion.Euler(tmpRot);
-        }
-        
+        base.Update();
         if (myTarget != null && playerSpotted)
         {
             JumpTowardsPlayer();

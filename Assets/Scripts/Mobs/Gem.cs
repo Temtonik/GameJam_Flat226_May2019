@@ -29,7 +29,6 @@ public class Gem : MonoBehaviour
                 isShot = true;
                 myAS.Play();
                 DestroyMe();
-                GetComponent<LittleHeadManager>().UnlockAbility();
             }
             transform.position = Vector3.MoveTowards(transform.position, Camera.main.transform.position, shootSpeed * Time.deltaTime);
         }
@@ -59,6 +58,7 @@ public class Gem : MonoBehaviour
         Destroy(Instantiate(vfxTrans, transform.position, Quaternion.identity), 0.8f);
         isComplete = true;
         UIManager.s_Singleton.DisplayDialogueBox(myText, this);
+        GetComponent<LittleHeadManager>().UnlockAbility();
     }
 
     public void ActivateCollider()
@@ -69,6 +69,7 @@ public class Gem : MonoBehaviour
     public void DeactivateCollider ()
     {
         GetComponent<CircleCollider2D>().enabled = false;
+        UIManager.s_Singleton.GetComponent<AudioSource>().Stop();
     }
 
     public void DestroyMe ()

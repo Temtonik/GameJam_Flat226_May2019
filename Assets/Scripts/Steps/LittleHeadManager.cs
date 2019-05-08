@@ -18,7 +18,7 @@ public class LittleHeadManager : MonoBehaviour
         switch (unlock)
         {
             case WhichAbility.JUMP_HIGHER:
-                PlayerManager.s_Singleton.jumpHigher = 600;
+                PlayerManager.s_Singleton.jumpHigher = 650;
                 break;
             case WhichAbility.FLY:
                 PlayerManager.s_Singleton.fly = true;
